@@ -216,7 +216,6 @@ This backend powers two Flutter applications:
 
 **Ihsan Khan** — Flutter & Full Stack Developer
 
-- Portfolio: [ihsanflutterdev.com](https://ihsanflutterdev.com)
 - LinkedIn: [linkedin.com/in/ihsan-khan752](https://linkedin.com/in/ihsan-khan752)
 - GitHub: [@ihsankhan-752](https://github.com/ihsankhan-752)
 
