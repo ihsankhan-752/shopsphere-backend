@@ -96,3 +96,21 @@ export const userLogin = async (req, res) => {
 
   return res.status(200).json({ token: token, id: existingUser.id });
 };
+
+export const getCurrentUser = async (req, res) => {
+  try {
+    const [currentUser] = await db
+      .select({
+        email: usersTable.email,
+        name: usersTable.name,
+      })
+      .from(usersTable)
+      .where(eq(usersTable.id, req.user.id));
+
+    return res.status(200).json({ success: true, data: currentUser });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Something went wrong!" });
+  }
+};
