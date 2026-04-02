@@ -9,3 +9,5 @@ export { ordersTable, orderItemTable } from "./order.schema.js";
 
 export { bannerTable } from "./banner.schema.js";
 export { addressTable } from "./address.schema.js";
+
+export { blackListTokenTable } from "./blacklist.token.schema.js";

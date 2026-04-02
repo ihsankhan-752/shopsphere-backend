@@ -8,6 +8,7 @@ import { randomBytes, createHmac } from "node:crypto";
 import { z } from "zod";
 import { eq } from "drizzle-orm";
 import jwt from "jsonwebtoken";
+import { blackListTokenTable } from "../db/schema/blacklist.token.schema.js";
 
 export const userSignUp = async (req, res) => {
   const validatationRes = await authSignUpValidation.safeParseAsync(req.body);
@@ -112,5 +113,28 @@ export const getCurrentUser = async (req, res) => {
     return res
       .status(500)
       .json({ success: false, message: "Something went wrong!" });
+  }
+};
+
+export const logOut = async (req, res) => {
+  try {
+    const token = req.headers.authorization.split(" ")[1];
+
+    if (!token) {
+      return res
+        .status(400)
+        .json({ success: false, message: "No Token Provided" });
+    }
+
+    await db.insert(blackListTokenTable).values({ token });
+
+    return res.status(200).json({
+      success: true,
+      message: "Logged out successfully",
+    });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Something went wrong" });
   }
 };
